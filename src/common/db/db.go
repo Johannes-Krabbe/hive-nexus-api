@@ -15,8 +15,7 @@ func Init(url string) *gorm.DB {
         log.Fatalln(err)
     }
 
-	// todo johannes: migrate all models
-    db.AutoMigrate(&models.User{})
+    db.AutoMigrate(&models.User{}, &models.Post{})
 
     return db
 }
