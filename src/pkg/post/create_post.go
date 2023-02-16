@@ -21,13 +21,21 @@ func (h handler) CreatePost(c *gin.Context) {
         return
     }
 
-    var post models.Post
 
-    post.User = models.User{ID: body.UserID}
+    var post models.Post
+    var user models.User
+    
+    if  result := h.DB.Find(&user, body.UserID); result.Error != nil || user.ID <= 0  {
+        c.AbortWithStatus(http.StatusUnauthorized)
+        return
+    }
+
+
+    post.User = user
     post.Content = body.Content
 
     if result := h.DB.Create(&post); result.Error != nil {
-        c.AbortWithError(http.StatusNotFound, result.Error)
+        c.AbortWithError(http.StatusInternalServerError, result.Error)
         return
     }
 

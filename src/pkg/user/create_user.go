@@ -29,7 +29,7 @@ func (h handler) CreateUser(c *gin.Context) {
     user.Password = body.Password
 
     if result := h.DB.Create(&user); result.Error != nil {
-        c.AbortWithError(http.StatusNotFound, result.Error)
+        c.AbortWithError(http.StatusInternalServerError, result.Error)
         return
     }
 
