@@ -1,10 +1,20 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type Comments struct {
-    gorm.Model  // adds ID, created_at etc.
-    Username		string `json:"username"`
-    Email	 	string `json:"email"`
-	Password	string `json:"password"`
+	ID        uint `gorm:"primaryKey"`
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	DeleteAt  gorm.DeletedAt
+
+	Content string `json:"Content" gorm:"type varchar(128) not null"`
+	UserID  uint   `json:"UserID"`
+	PostID  uint   `json:"PostID"`
+	User    User   `json:"User"`
+	Post    Post   `json:"Post"`
 }
