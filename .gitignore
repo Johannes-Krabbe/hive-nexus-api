@@ -1,5 +1,7 @@
 .env
 
+/tmp
+
 gin-bin
 
 # Binaries for programs and plugins

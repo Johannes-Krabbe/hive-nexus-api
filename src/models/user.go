@@ -15,4 +15,5 @@ type User struct {
     Username string `json:"Username" gorm:"type: varchar(32) not null unique"`
     Email string `json:"Email" gorm:"type: varchar(128) not null unique"`
 	Password string `json:"Password" gorm:"type: varchar(128) not null"`
+	Salt string `json:"Salt" gorm:"type: varchar(128) not null"`
 }
