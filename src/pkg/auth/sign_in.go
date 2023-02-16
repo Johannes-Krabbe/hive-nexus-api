@@ -41,6 +41,13 @@ func (h handler) SignIn(c *gin.Context) {
         return
 	}
 
+    token, err := generateJWT(user.ID)
 
-    c.JSON(http.StatusCreated, &user)
+    if err != nil {
+        c.AbortWithStatusJSON(http.StatusInternalServerError,gin.H{"error": true, "message":"Something went wrong"})
+        return
+    }
+
+
+    c.JSON(http.StatusCreated, gin.H{"token": token})
 }

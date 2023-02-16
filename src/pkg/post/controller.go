@@ -1,6 +1,7 @@
 package post
 
 import (
+	"github.com/Johannes-Krabbe/hive-nexus-api/src/pkg/auth"
 	"github.com/gin-gonic/gin"
 
 	"gorm.io/gorm"
@@ -14,6 +15,8 @@ func RegisterRoutes(r *gin.RouterGroup, db *gorm.DB) {
     h := &handler{
         DB: db,
     }
+
+    r.Use(auth.VerifyTokenMiddleware())
 
     r.POST("/create", h.CreatePost)
 }

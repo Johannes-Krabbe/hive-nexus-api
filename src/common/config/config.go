@@ -10,6 +10,7 @@ type Config struct {
     Port  string `mapstructure:"PORT"`
     DBUrl string `mapstructure:"DB_URL"`
     ClientUrl string `mapstructure:"CLIENT_URL"`
+    JwtSecret string `mapstructure:"JWT_SECRET"`
 }
 
 func LoadConfig() (c Config, err error) {
@@ -28,4 +29,9 @@ func LoadConfig() (c Config, err error) {
 
 	log.Println("Successfully loaded config")
     return
+}
+
+func GetValueFromEnv(key string) string {
+	value := viper.GetString(key)
+	return value
 }

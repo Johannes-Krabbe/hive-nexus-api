@@ -8,7 +8,6 @@ import (
 )
 
 type CreatePostRequestBody struct {
-    UserID uint `json:"UserID"`
     Content string `json:"Content"`
 }
 
@@ -22,10 +21,16 @@ func (h handler) CreatePost(c *gin.Context) {
     }
 
 
+    userID, ok := c.Get("UserID")
+	if !ok {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "User ID is missing from context"})
+		return
+	}
+
     var post models.Post
     var user models.User
     
-    if  result := h.DB.Find(&user, body.UserID); result.Error != nil || user.ID <= 0  {
+    if  result := h.DB.Find(&user, userID); result.Error != nil || user.ID <= 0  {
         c.AbortWithStatus(http.StatusUnauthorized)
         return
     }
