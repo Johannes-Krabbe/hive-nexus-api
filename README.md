@@ -5,5 +5,3 @@
 3. create a `.env` file and copy out the content of the `.env.example` and change it depending on your settings.
 4. you may need to run `go mod download` or `go get ./...` to fetch all the required packages
 5. run the application with `go run ./src/main.go`
-
-test
