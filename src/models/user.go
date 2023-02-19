@@ -20,7 +20,7 @@ type User struct {
 	Salt     string `json:"Salt" gorm:"type: varchar(128) not null"`
 }
 
-func userModelInit() {
+func init() {
 	valid.CustomTypeTagMap.Set("usernameValidator", func(i interface{}, context interface{}) bool {
 		switch v := context.(type) {
 		case User:
