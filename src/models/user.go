@@ -1,11 +1,8 @@
 package models
 
 import (
-	"time"
-
 	"gorm.io/gorm"
-
-	valid "github.com/asaskevich/govalidator"
+	"time"
 )
 
 type User struct {
@@ -14,23 +11,8 @@ type User struct {
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt
 
-	Username string `json:"Username" gorm:"type: varchar(32) not null unique valid:"usernameValidator, length(4|32)"`
-	Email    string `json:"Email" gorm:"type: varchar(128) not null unique" valid:"email"`
-	Password string `json:"Password" gorm:"type: varchar(128) not null"`
-	Salt     string `json:"Salt" gorm:"type: varchar(128) not null"`
-}
-
-func init() {
-	valid.CustomTypeTagMap.Set("usernameValidator", func(i interface{}, context interface{}) bool {
-		switch v := context.(type) {
-		case User:
-			for _, c := range v.Username {
-				if valid.IsNumeric(string(c)) || valid.IsLowerCase(string(c)) || string(c) == "-" || string(c) == "_" {
-					return false
-				}
-			}
-			return true
-		}
-		return false
-	})
+	Username string `validate:"required,min=4,max=32,lowercase,alphanum" json:"Username" gorm:"type varchar(32) not null unique"`
+	Email    string `validate:"required,email" json:"Email" gorm:"type varchar(128) not null unique"`
+	Password string `validate:"required" json:"Password" gorm:"type varchar(128) not null"`
+	Salt     string `validate:"required" json:"Salt" gorm:"type varchar(128) not null"`
 }
