@@ -12,7 +12,7 @@ func VerifyTokenMiddleware() gin.HandlerFunc {
 		// Get the token string from the Authorization cookie
 		tokenString, err := c.Cookie("token")
 		if err != nil {
-			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": true, "message":"Authorization token cookie is missing"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": true, "message": "Authorization token cookie is missing"})
 			return
 		}
 
