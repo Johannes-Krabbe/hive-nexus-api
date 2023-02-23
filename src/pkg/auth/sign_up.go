@@ -7,6 +7,7 @@ import (
 	"github.com/Johannes-Krabbe/hive-nexus-api/src/models"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"github.com/google/uuid"
 )
 
 type SignUpRequestBody struct {
@@ -31,13 +32,13 @@ func (h handler) SignUp(c *gin.Context) {
 
 	//checking if user with username or email already exists
 	// using .DB.Limit(1).Find here instead of .First to prevent error messages
-	if h.DB.Limit(1).Find(&user, "username = ?", body.Username); user.ID > 0 {
+	if h.DB.Limit(1).Find(&user, "username = ?", body.Username); user.ID != uuid.Nil {
 		fmt.Println(user)
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": true, "message": "Username already exists"})
 		return
 	}
 
-	if h.DB.Limit(1).Find(&user, "email = ?", body.Email); user.ID > 0 {
+	if h.DB.Limit(1).Find(&user, "email = ?", body.Email); user.ID != uuid.Nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": true, "message": "Email already exists"})
 		return
 	}
@@ -62,7 +63,8 @@ func (h handler) SignUp(c *gin.Context) {
 	//test
 	err = validate.Struct(user)
 	if err != nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err})
+		fmt.Println(err)
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err, "message": "Validation Error"})
 		return
 	}
 

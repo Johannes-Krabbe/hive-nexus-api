@@ -6,6 +6,7 @@ import (
 	"github.com/Johannes-Krabbe/hive-nexus-api/src/models"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"github.com/google/uuid"
 )
 
 type CreatePostRequestBody struct {
@@ -33,7 +34,7 @@ func (h handler) CreatePost(c *gin.Context) {
 	var post models.Post
 	var user models.User
 
-	if result := h.DB.Find(&user, userID); result.Error != nil || user.ID <= 0 {
+	if result := h.DB.Find(&user, userID); result.Error != nil || user.ID != uuid.Nil {
 		c.AbortWithStatus(http.StatusUnauthorized)
 		return
 	}

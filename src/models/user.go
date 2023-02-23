@@ -1,12 +1,13 @@
 package models
 
 import (
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 	"time"
 )
 
 type User struct {
-	ID        uint           `gorm:"primarykey"`
+	ID        uuid.UUID      `gorm:"primaryKey;type:uuid;default:gen_random_uuid()"`
 	CreatedAt time.Time      `json:"createdAt,omitempty"`
 	UpdatedAt time.Time      `json:"UpdatedAt,omitempty"`
 	DeletedAt gorm.DeletedAt `json:"DeletedAt,omitempty"`

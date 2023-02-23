@@ -1,10 +1,12 @@
 package auth
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/Johannes-Krabbe/hive-nexus-api/src/models"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 type SignInRequestBody struct {
@@ -25,7 +27,8 @@ func (h handler) SignIn(c *gin.Context) {
 
 	// checking if user with username or email already exists
 	// using .DB.Limit(1).Find here instead of .First to prevent error messages
-	if h.DB.Limit(1).Find(&user, "email = ?", body.Email); user.ID <= 0 {
+	if h.DB.Limit(1).Find(&user, "email = ?", body.Email); user.ID == uuid.Nil {
+		fmt.Println(user)
 		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": true, "message": "Email does not exists"})
 		return
 	}
