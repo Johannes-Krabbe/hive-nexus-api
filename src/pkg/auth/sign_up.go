@@ -59,6 +59,7 @@ func (h handler) SignUp(c *gin.Context) {
 	fmt.Println("password", user.Password)
 	fmt.Println("salt", user.Salt)
 
+	//test
 	err = validate.Struct(user)
 	if err != nil {
 		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err})
