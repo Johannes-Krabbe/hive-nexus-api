@@ -11,7 +11,8 @@ import (
 )
 
 type CreatePostRequestBody struct {
-	Content string `json:"Content"`
+	Title string `json:"Content"`
+	// Content string `json:"Content"`
 }
 
 var validate *validator.Validate

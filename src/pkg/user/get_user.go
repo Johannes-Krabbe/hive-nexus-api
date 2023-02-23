@@ -11,21 +11,17 @@ import (
 	"github.com/google/uuid"
 )
 
-type GetUserRequestBody struct {
-	Username string `json:"username"`
-}
-
 type PublicUserData struct {
 	Username  string    `json:"username"`
 	CreatedAt time.Time `json:"createdAt"`
 }
 
 func (h handler) GetUser(c *gin.Context) {
-	body := GetUserRequestBody{}
 
-	// getting request's body
-	if err := c.BindJSON(&body); err != nil {
-		c.AbortWithError(http.StatusBadRequest, err)
+	// getting params
+	username := c.Query("username")
+	if username == "" {
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Include Username in querry params")
 		return
 	}
 
@@ -33,7 +29,7 @@ func (h handler) GetUser(c *gin.Context) {
 
 	// checking if user with username or email already exists
 	// using .DB.Limit(1).Find here instead of .First to prevent error messages
-	if h.DB.Limit(1).Select("ID", "CreatedAt", "Username").Find(&user, "username = ?", body.Username); user.ID == uuid.Nil {
+	if h.DB.Limit(1).Select("ID", "CreatedAt", "Username").Find(&user, "username = ?", username); user.ID == uuid.Nil {
 		fmt.Println(user)
 		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": true, "message": "User with this username does not exist"})
 		return
