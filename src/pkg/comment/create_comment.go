@@ -5,11 +5,12 @@ import (
 
 	"github.com/Johannes-Krabbe/hive-nexus-api/src/models"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 type CreateCommentRequestBody struct {
-	Content string `json:"Content"`
-	PostID  uint   `json:"PostID"`
+	Content string    `json:"Content"`
+	PostID  uuid.UUID `json:"PostID"`
 }
 
 func (h handler) CreateComment(c *gin.Context) {
@@ -25,21 +26,21 @@ func (h handler) CreateComment(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "User ID is missing from context"})
 	}
 
-	var post = models.Post
-	var user = models.User
+	var post models.Post
+	var user models.User
 
-	if result := h.DB.Find(&user, userID); result.Error != nil || user.ID <= 0 {
-		c.AbortWithError(http.StatusUnauthorized)
+	if result := h.DB.Find(&user, userID); result.Error != nil || user.ID == uuid.Nil {
+		c.AbortWithError(http.StatusUnauthorized, result.Error)
 		return
 	}
 
 	var postID = body.PostID
-	if result := h.DB.Find(&post, postID); result.Error != nil || post.ID <= 0 {
-		c.AbortWithError(http.StatusBadRequest)
+	if result := h.DB.Find(&post, postID); result.Error != nil || post.ID == uuid.Nil {
+		c.AbortWithError(http.StatusBadRequest, result.Error)
 		return
 	}
 
-	var comment = models.Comment
+	var comment models.Comment
 	comment.Content = body.Content
 	comment.User = user
 	comment.Post = post

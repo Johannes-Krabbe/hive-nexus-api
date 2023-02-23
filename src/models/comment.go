@@ -13,9 +13,9 @@ type Comment struct {
 	UpdatedAt time.Time
 	DeleteAt  gorm.DeletedAt
 
-	Content string `json:"Content" gorm:"type varchar(128) not null"`
-	UserID  uint   `json:"UserID"`
-	PostID  uint   `json:"PostID"`
-	User    User   `json:"User"`
-	Post    Post   `json:"Post"`
+	Content string    `json:"Content" gorm:"type varchar(128) not null"`
+	UserID  uuid.UUID `json:"UserID"`
+	PostID  uuid.UUID `json:"PostID"`
+	User    User      `json:"User"`
+	Post    Post      `json:"Post"`
 }

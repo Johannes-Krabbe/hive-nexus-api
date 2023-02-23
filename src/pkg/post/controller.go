@@ -19,4 +19,5 @@ func RegisterRoutes(r *gin.RouterGroup, db *gorm.DB) {
 	r.Use(auth.VerifyTokenMiddleware())
 
 	r.POST("/create", h.CreatePost)
+	r.GET("/all", h.GetPosts)
 }

@@ -1,6 +1,7 @@
 package post
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/Johannes-Krabbe/hive-nexus-api/src/models"
@@ -34,7 +35,7 @@ func (h handler) CreatePost(c *gin.Context) {
 	var post models.Post
 	var user models.User
 
-	if result := h.DB.Find(&user, userID); result.Error != nil || user.ID != uuid.Nil {
+	if result := h.DB.Find(&user, userID); result.Error != nil || user.ID == uuid.Nil {
 		c.AbortWithStatus(http.StatusUnauthorized)
 		return
 	}
@@ -49,6 +50,7 @@ func (h handler) CreatePost(c *gin.Context) {
 	}
 
 	if result := h.DB.Create(&post); result.Error != nil {
+		fmt.Println(result.Error)
 		c.AbortWithError(http.StatusInternalServerError, result.Error)
 		return
 	}

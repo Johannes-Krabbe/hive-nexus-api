@@ -13,8 +13,8 @@ type PostLike struct {
 	UpdatedAt time.Time
 	DeleteAt  gorm.DeletedAt
 
-	UserID uint `json:"UserID"`
-	PostID uint `json:"PostID"`
-	User   User `json:"User"`
-	Post   Post `json:"Post"`
+	UserID uuid.UUID `json:"UserID"`
+	PostID uuid.UUID `json:"PostID"`
+	User   User      `json:"User"`
+	Post   Post      `json:"Post"`
 }

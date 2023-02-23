@@ -38,7 +38,7 @@ func generateJWT(userID uuid.UUID) (string, error) {
 	var secret = []byte(config.GetValueFromEnv("JWT_SECRET"))
 	// Create the claims object with the user ID and expiration time
 	claims := jwt.MapClaims{
-		"user_id": userID,
+		"user_id": userID.String(),
 		"exp":     time.Now().Add(time.Hour * 24).Unix(),
 	}
 
@@ -69,7 +69,10 @@ func verifyJWT(tokenString string) (uuid.UUID, error) {
 
 	// Check if the token is valid and get the user ID from the claims
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
-		userID, ok := claims["user_id"].(uuid.UUID)
+		userIDstring, ok := claims["user_id"].(string)
+		// TODO dont discard the error
+		userID, _ := uuid.Parse(userIDstring)
+		fmt.Println(claims)
 		if !ok {
 			return uuid.Nil, fmt.Errorf("invalid user id")
 		}
