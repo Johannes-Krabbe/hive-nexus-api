@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type Comments struct {
+type Comment struct {
 	ID        uuid.UUID `gorm:"primaryKey;type:uuid;default:gen_random_uuid()"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
