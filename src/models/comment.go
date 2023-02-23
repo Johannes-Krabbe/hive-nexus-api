@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type Comments struct {
+type Comment struct {
 	ID        uint `gorm:"primaryKey"`
 	CreatedAt time.Time
 	UpdatedAt time.Time

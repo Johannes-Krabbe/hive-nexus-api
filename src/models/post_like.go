@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type PostLikes struct {
+type PostLike struct {
 	ID        uint `gorm:"primaryKey"`
 	CreatedAt time.Time
 	UpdatedAt time.Time
