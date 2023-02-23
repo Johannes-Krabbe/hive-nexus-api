@@ -9,11 +9,9 @@ import (
 	"gorm.io/gorm"
 )
 
-
 func RegisterRoutes(r *gin.Engine, db *gorm.DB) {
 
-
-    user.RegisterRoutes(r.Group("/user"), db)
-    post.RegisterRoutes(r.Group("/post"), db)
-    auth.RegisterRoutes(r.Group("/auth"), db)
+	user.RegisterRoutes(r.Group("/user"), db)
+	post.RegisterRoutes(r.Group("/post"), db)
+	auth.RegisterRoutes(r.Group("/auth"), db)
 }

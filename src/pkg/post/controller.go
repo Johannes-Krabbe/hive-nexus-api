@@ -8,15 +8,15 @@ import (
 )
 
 type handler struct {
-    DB *gorm.DB
+	DB *gorm.DB
 }
 
 func RegisterRoutes(r *gin.RouterGroup, db *gorm.DB) {
-    h := &handler{
-        DB: db,
-    }
+	h := &handler{
+		DB: db,
+	}
 
-    r.Use(auth.VerifyTokenMiddleware())
+	r.Use(auth.VerifyTokenMiddleware())
 
-    r.POST("/create", h.CreatePost)
+	r.POST("/create", h.CreatePost)
 }

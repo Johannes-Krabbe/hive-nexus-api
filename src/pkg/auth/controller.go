@@ -7,14 +7,14 @@ import (
 )
 
 type handler struct {
-    DB *gorm.DB
+	DB *gorm.DB
 }
 
 func RegisterRoutes(r *gin.RouterGroup, db *gorm.DB) {
-    h := &handler{
-        DB: db,
-    }
+	h := &handler{
+		DB: db,
+	}
 
-    r.POST("/sign-up", h.SignUp)
-    r.POST("/sign-in", h.SignIn)
+	r.POST("/sign-up", h.SignUp)
+	r.POST("/sign-in", h.SignIn)
 }

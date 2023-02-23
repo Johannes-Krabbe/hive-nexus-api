@@ -7,28 +7,28 @@ import (
 )
 
 type Config struct {
-    Port  string `mapstructure:"PORT"`
-    DBUrl string `mapstructure:"DB_URL"`
-    ClientUrl string `mapstructure:"CLIENT_URL"`
-    JwtSecret string `mapstructure:"JWT_SECRET"`
+	Port      string `mapstructure:"PORT"`
+	DBUrl     string `mapstructure:"DB_URL"`
+	ClientUrl string `mapstructure:"CLIENT_URL"`
+	JwtSecret string `mapstructure:"JWT_SECRET"`
 }
 
 func LoadConfig() (c Config, err error) {
 	log.Println("Loading config")
 	viper.SetConfigFile("./.env")
 
-    viper.AutomaticEnv()
+	viper.AutomaticEnv()
 
-    err = viper.ReadInConfig()
+	err = viper.ReadInConfig()
 
 	if err != nil {
-        return
-    }
+		return
+	}
 
-    err = viper.Unmarshal(&c)
+	err = viper.Unmarshal(&c)
 
 	log.Println("Successfully loaded config")
-    return
+	return
 }
 
 func GetValueFromEnv(key string) string {
