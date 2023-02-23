@@ -33,7 +33,7 @@ func (h handler) GetUser(c *gin.Context) {
 
 	// checking if user with username or email already exists
 	// using .DB.Limit(1).Find here instead of .First to prevent error messages
-	if h.DB.Limit(1).Select("ID", "CreatedAt", "Username").Find(&user, "username = ?", body.Username); user.ID != uuid.Nil {
+	if h.DB.Limit(1).Select("ID", "CreatedAt", "Username").Find(&user, "username = ?", body.Username); user.ID == uuid.Nil {
 		fmt.Println(user)
 		c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": true, "message": "User with this username does not exist"})
 		return
