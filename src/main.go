@@ -14,21 +14,20 @@ func main() {
 	config, err := config.LoadConfig()
 
 	if err != nil {
-        log.Fatalln(err)
-    }
+		log.Fatalln(err)
+	}
 
-    router := gin.Default()
-    h := db.Init(config.DBUrl)
+	router := gin.Default()
+	h := db.Init(config.DBUrl)
 
+	corsConfig := cors.DefaultConfig()
+	corsConfig.AllowOrigins = []string{config.ClientUrl}
+	corsConfig.AllowCredentials = true
 
-    corsConfig := cors.DefaultConfig()
-    corsConfig.AllowOrigins = []string{config.ClientUrl}
-    corsConfig.AllowCredentials = true
-  
-    router.Use(cors.New(corsConfig))
+	router.Use(cors.New(corsConfig))
 
+	routes.RegisterRoutes(router, h)
 
-    routes.RegisterRoutes(router, h)
-
-    router.Run(config.Port)
+	// temporary fix for popup in macos
+	_ = router.Run("localhost:3001")
 }

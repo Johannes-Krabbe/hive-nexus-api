@@ -23,7 +23,7 @@ func (h handler) SignUp(c *gin.Context) {
 
 	// getting request's body
 	if err := c.BindJSON(&body); err != nil {
-		c.AbortWithError(http.StatusBadRequest, err)
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"err": err})
 		return
 	}
 
@@ -59,14 +59,15 @@ func (h handler) SignUp(c *gin.Context) {
 	fmt.Println("password", user.Password)
 	fmt.Println("salt", user.Salt)
 
+	//test
 	err = validate.Struct(user)
 	if err != nil {
-		c.AbortWithError(http.StatusBadRequest, err)
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err})
 		return
 	}
 
 	if result := h.DB.Create(&user); result.Error != nil {
-		c.AbortWithError(http.StatusInternalServerError, result.Error)
+		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": result.Error})
 		return
 	}
 
