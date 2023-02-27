@@ -18,12 +18,22 @@ func main() {
 	}
 
 	router := gin.Default()
+	// Disable automatic redirects
+	router.RedirectTrailingSlash = false
+	router.RedirectFixedPath = false
+
 	h := db.Init(config.DBUrl)
 
 	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowOrigins = []string{config.ClientUrl}
+
+	corsConfig.AllowOrigins = []string{"https://example.com"}
+	// To be able to send tokens to the server.
 	corsConfig.AllowCredentials = true
 
+	// OPTIONS method for ReactJS
+	corsConfig.AddAllowMethods("OPTIONS")
+
+	// Register the middleware
 	router.Use(cors.New(corsConfig))
 
 	routes.RegisterRoutes(router, h)

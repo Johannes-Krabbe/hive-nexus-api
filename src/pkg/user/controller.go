@@ -15,5 +15,5 @@ func RegisterRoutes(r *gin.RouterGroup, db *gorm.DB) {
 		DB: db,
 	}
 
-	r.GET("/", h.GetUser)
+	r.GET("/one", h.GetUser)
 }
