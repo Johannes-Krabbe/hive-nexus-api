@@ -26,7 +26,7 @@ func main() {
 
 	corsConfig := cors.DefaultConfig()
 
-	corsConfig.AllowOrigins = []string{"https://example.com"}
+	corsConfig.AllowOrigins = []string{config.ClientUrl}
 	// To be able to send tokens to the server.
 	corsConfig.AllowCredentials = true
 
