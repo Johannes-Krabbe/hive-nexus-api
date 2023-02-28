@@ -8,10 +8,10 @@ import (
 )
 
 type Comment struct {
-	ID        uuid.UUID `gorm:"primaryKey;type:uuid;default:gen_random_uuid()"`
-	CreatedAt time.Time
-	UpdatedAt time.Time
-	DeleteAt  gorm.DeletedAt
+	ID        uuid.UUID      `gorm:"primaryKey;type:uuid;default:gen_random_uuid()"`
+	CreatedAt time.Time      `json:"createdAt,omitempty"`
+	UpdatedAt time.Time      `json:"UpdatedAt,omitempty"`
+	DeleteAt  gorm.DeletedAt `json:"DeletedAt,omitempty"`
 
 	Content string    `json:"Content" gorm:"type varchar(128) not null"`
 	UserID  uuid.UUID `json:"UserID"`
