@@ -22,8 +22,9 @@ func (h handler) CreateComment(c *gin.Context) {
 	}
 
 	userID, ok := c.Get("UserID")
-	if !ok { // why internal server error?
+	if !ok {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "User ID is missing from context"})
+		return
 	}
 
 	var post models.Post
