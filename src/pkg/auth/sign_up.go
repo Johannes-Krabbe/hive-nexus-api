@@ -16,6 +16,11 @@ type SignUpRequestBody struct {
 	Password string `json:"password"`
 }
 
+type viewSignUpData struct {
+	Username string `json:"username"`
+	Token    string `json:"token"`
+}
+
 var validate *validator.Validate
 
 func (h handler) SignUp(c *gin.Context) {
@@ -73,5 +78,7 @@ func (h handler) SignUp(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, &user)
+	token, err := generateJWT(user.ID)
+
+	c.JSON(http.StatusCreated, viewSignUpData{Username: user.Username, Token: token})
 }
