@@ -11,8 +11,8 @@ import (
 )
 
 type CreatePostRequestBody struct {
-	// Title string `json:"Content"`
-	Content string `json:"Content"`
+	Title   string `json:"title"`
+	Content string `json:"content"`
 }
 
 var validate *validator.Validate
@@ -43,6 +43,7 @@ func (h handler) CreatePost(c *gin.Context) {
 
 	post.User = user
 	post.Content = body.Content
+	post.Title = body.Title
 
 	err := validate.Struct(post)
 	if err != nil {
