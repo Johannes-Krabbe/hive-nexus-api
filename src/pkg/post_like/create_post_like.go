@@ -9,7 +9,7 @@ import (
 )
 
 type CreatePostLikeRequestBoday struct {
-	PostID uuid.UUID `json:"PostID"`
+	PostID uuid.UUID `json:"postID"`
 }
 
 func (h handler) CreatePostLike(c *gin.Context) {

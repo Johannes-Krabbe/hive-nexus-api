@@ -10,7 +10,7 @@ import (
 )
 
 type DeletePostLikeRequestBody struct {
-	PostLikeID uuid.UUID `json:"PostLikeID"`
+	PostLikeID uuid.UUID `json:"postLikeID"`
 }
 
 func (h handler) DeletePostLike(c *gin.Context) {

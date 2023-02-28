@@ -9,8 +9,8 @@ import (
 )
 
 type CreateCommentRequestBody struct {
-	Content string    `json:"Content"`
-	PostID  uuid.UUID `json:"PostID"`
+	Content string    `json:"content"`
+	PostID  uuid.UUID `json:"postID"`
 }
 
 func (h handler) CreateComment(c *gin.Context) {
