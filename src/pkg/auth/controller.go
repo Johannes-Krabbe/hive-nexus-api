@@ -17,4 +17,5 @@ func RegisterRoutes(r *gin.RouterGroup, db *gorm.DB) {
 
 	r.POST("/sign-up", h.SignUp)
 	r.POST("/sign-in", h.SignIn)
+	r.POST("/availability-check", h.AvailabilityCheck)
 }
