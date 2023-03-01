@@ -1,10 +1,20 @@
 package comment
 
 import (
+	"time"
+
 	"github.com/Johannes-Krabbe/hive-nexus-api/src/pkg/auth"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
+
+type PublicCommentData struct {
+	Content   string    `json:"content"`
+	CreatedAt time.Time `json:"createdAt"`
+	Username  string    `json:"username"`
+	PostID    uuid.UUID `json:"postID"`
+}
 
 type handler struct {
 	DB *gorm.DB

@@ -51,5 +51,11 @@ func (h handler) CreateComment(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, &comment)
+	var viewData PublicCommentData
+	viewData.Content = comment.Content
+	viewData.CreatedAt = comment.CreatedAt
+	viewData.Username = comment.User.Username
+	viewData.PostID = comment.PostID
+
+	c.JSON(http.StatusCreated, gin.H{"data": viewData})
 }
