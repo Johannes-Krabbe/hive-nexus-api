@@ -58,6 +58,7 @@ func (h handler) CreatePost(c *gin.Context) {
 	}
 
 	var viewData PublicPostData
+	viewData.PostID = post.ID
 	viewData.Content = post.Content
 	viewData.Title = post.Title
 	viewData.CreatedAt = post.CreatedAt

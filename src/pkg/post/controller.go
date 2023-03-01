@@ -5,11 +5,13 @@ import (
 
 	"github.com/Johannes-Krabbe/hive-nexus-api/src/pkg/auth"
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 
 	"gorm.io/gorm"
 )
 
 type PublicPostData struct {
+	PostID    uuid.UUID `json:"postID"`
 	Content   string    `json:"content"`
 	Title     string    `json:"title"`
 	CreatedAt time.Time `json:"createdAt"`
