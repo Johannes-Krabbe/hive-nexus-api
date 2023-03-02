@@ -11,11 +11,11 @@ import (
 )
 
 type PublicPostData struct {
-	PostID    uuid.UUID `json:"postID"`
-	Content   string    `json:"content"`
-	Title     string    `json:"title"`
-	CreatedAt time.Time `json:"createdAt"`
-	Username  string    `json:"username"`
+	PostID    uuid.UUID `json:"postID,omitempty"`
+	Content   string    `json:"content,omitempty"`
+	Title     string    `json:"title,omitempty"`
+	CreatedAt time.Time `json:"createdAt,omitempty"`
+	Username  string    `json:"username,omitempty"`
 }
 
 type handler struct {

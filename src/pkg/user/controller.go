@@ -8,8 +8,8 @@ import (
 )
 
 type PublicUserData struct {
-	Username  string    `json:"username"`
-	CreatedAt time.Time `json:"createdAt"`
+	Username  string    `json:"username,omitempty"`
+	CreatedAt time.Time `json:"createdAt,omitempty"`
 }
 
 type handler struct {

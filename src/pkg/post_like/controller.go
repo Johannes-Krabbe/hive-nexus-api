@@ -8,9 +8,9 @@ import (
 )
 
 type PublicPostLikeData struct {
-	PostLikeID uuid.UUID `json:"postLikeID"`
-	UserID     uuid.UUID `json:"userID"`
-	PostID     uuid.UUID `json:"postID"`
+	PostLikeID uuid.UUID `json:"postLikeID,omitempty"`
+	UserID     uuid.UUID `json:"userID,omitempty"`
+	PostID     uuid.UUID `json:"postID,omitempty"`
 }
 
 type handler struct {
