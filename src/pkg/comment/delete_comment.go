@@ -45,10 +45,6 @@ func (h handler) DeleteComment(c *gin.Context) {
 
 	var viewData PublicCommentData
 	viewData.CommentID = comment.ID
-	viewData.Content = comment.Content
-	viewData.CreatedAt = comment.CreatedAt
-	viewData.Username = comment.User.Username
-	viewData.PostID = comment.PostID
 
 	c.JSON(http.StatusOK, gin.H{"data": viewData})
 }
