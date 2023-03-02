@@ -46,5 +46,5 @@ func (h handler) DeletePost(c *gin.Context) {
 	var viewData PublicPostData
 	viewData.PostID = post.ID
 
-	c.JSON(http.StatusCreated, gin.H{"data": viewData})
+	c.JSON(http.StatusOK, gin.H{"data": viewData})
 }
