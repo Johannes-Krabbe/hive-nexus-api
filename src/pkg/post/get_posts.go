@@ -8,10 +8,26 @@ import (
 )
 
 func (h handler) GetPosts(c *gin.Context) {
-
 	var posts []models.Post
 
-	h.DB.Preload("User").Find(&posts)
+	if result := h.DB.Preload("User").Find(&posts); result.Error != nil {
+		c.AbortWithError(http.StatusInternalServerError, result.Error)
+		return
+	}
 
-	c.JSON(http.StatusCreated, gin.H{"data": posts})
+	var viewDataArr []PublicPostData
+
+	for _, post := range posts {
+		var viewData PublicPostData
+
+		viewData.PostID = post.ID
+		viewData.Content = post.Content
+		viewData.Title = post.Title
+		viewData.CreatedAt = post.CreatedAt
+		viewData.Username = post.User.Username
+
+		viewDataArr = append(viewDataArr, viewData)
+	}
+
+	c.JSON(http.StatusCreated, gin.H{"data": viewDataArr})
 }
