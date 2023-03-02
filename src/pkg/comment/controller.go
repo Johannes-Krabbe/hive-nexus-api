@@ -28,5 +28,6 @@ func RegisterRoutes(r *gin.RouterGroup, db *gorm.DB) {
 	r.Use(auth.VerifyTokenMiddleware())
 
 	r.POST("/create", h.CreateComment)
+	r.GET("/get-multiple", h.GetComments)
 	// r.DELETE("/delete", h.DeleteComment)
 }
