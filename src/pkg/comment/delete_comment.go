@@ -1,7 +1,6 @@
 package comment
 
 import (
-	"errors"
 	"net/http"
 
 	"github.com/Johannes-Krabbe/hive-nexus-api/src/models"
@@ -28,13 +27,14 @@ func (h handler) DeleteComment(c *gin.Context) {
 	}
 
 	var comment models.Comment
+
 	if result := h.DB.Find(&comment, body.CommentID); result.Error != nil || comment.ID == uuid.Nil {
-		c.AbortWithError(http.StatusUnauthorized, result.Error)
+		c.AbortWithError(http.StatusBadRequest, result.Error)
 		return
 	}
 
 	if comment.UserID != userID {
-		c.AbortWithError(http.StatusUnauthorized, errors.New("Unauthorized request to delete comment."))
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "User is not authorized to delete this comment"})
 		return
 	}
 

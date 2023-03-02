@@ -30,4 +30,5 @@ func RegisterRoutes(r *gin.RouterGroup, db *gorm.DB) {
 
 	r.POST("/create", h.CreateComment)
 	r.DELETE("/delete", h.DeleteComment)
+	r.GET("/get-multiple", h.GetComments)
 }
