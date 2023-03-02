@@ -14,6 +14,7 @@ type PublicCommentData struct {
 	CreatedAt time.Time `json:"createdAt"`
 	Username  string    `json:"username"`
 	PostID    uuid.UUID `json:"postID"`
+	CommentID uuid.UUID `json:"commentID"`
 }
 
 type handler struct {
@@ -28,5 +29,5 @@ func RegisterRoutes(r *gin.RouterGroup, db *gorm.DB) {
 	r.Use(auth.VerifyTokenMiddleware())
 
 	r.POST("/create", h.CreateComment)
-	// r.DELETE("/delete", h.DeleteComment)
+	r.DELETE("/delete", h.DeleteComment)
 }

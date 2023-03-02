@@ -52,6 +52,7 @@ func (h handler) CreateComment(c *gin.Context) {
 	}
 
 	var viewData PublicCommentData
+	viewData.CommentID = comment.ID
 	viewData.Content = comment.Content
 	viewData.CreatedAt = comment.CreatedAt
 	viewData.Username = comment.User.Username
