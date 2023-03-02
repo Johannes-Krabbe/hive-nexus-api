@@ -19,18 +19,30 @@ func (h handler) GetUser(c *gin.Context) {
 
 	// getting params
 	username := c.Query("username")
+	userID := c.Query("userID")
 	// c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 
-	if username == "" {
-		c.AbortWithStatusJSON(http.StatusBadRequest, "Include Username in querry params")
+	if username == "" && userID == "" {
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Include Username or UserID in querry params")
+		return
+	}
+
+	if username != "" && userID != "" {
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Include just one: Username or UserID in querry params")
 		return
 	}
 
 	var user models.User
-
-	if h.DB.Limit(1).Select("ID", "CreatedAt", "Username").Find(&user, "username = ?", username); user.ID == uuid.Nil {
-		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": true, "message": "User with this username does not exist"})
-		return
+	if username != "" {
+		if h.DB.Limit(1).Select("ID", "CreatedAt", "Username").Find(&user, "username = ?", username); user.ID == uuid.Nil {
+			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": true, "message": "User with this username does not exist"})
+			return
+		}
+	} else {
+		if h.DB.Limit(1).Select("ID", "CreatedAt", "Username").Find(&user, "ID = ?", userID); user.ID == uuid.Nil {
+			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": true, "message": "User with this ID does not exist"})
+			return
+		}
 	}
 
 	var viewData PublicUserData
