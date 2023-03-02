@@ -57,5 +57,12 @@ func (h handler) CreatePost(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, &post)
+	var viewData PublicPostData
+	viewData.PostID = post.ID
+	viewData.Content = post.Content
+	viewData.Title = post.Title
+	viewData.CreatedAt = post.CreatedAt
+	viewData.Username = post.User.Username
+
+	c.JSON(http.StatusCreated, gin.H{"data": viewData})
 }

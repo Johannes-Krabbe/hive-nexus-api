@@ -1,10 +1,16 @@
 package user
 
 import (
-	"github.com/gin-gonic/gin"
+	"time"
 
+	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
+
+type PublicUserData struct {
+	Username  string    `json:"username"`
+	CreatedAt time.Time `json:"createdAt"`
+}
 
 type handler struct {
 	DB *gorm.DB

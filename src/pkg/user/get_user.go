@@ -2,18 +2,11 @@ package user
 
 import (
 	"net/http"
-	"time"
 
-	"github.com/Johannes-Krabbe/hive-nexus-api/src/helpers"
 	"github.com/Johannes-Krabbe/hive-nexus-api/src/models"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
-
-type PublicUserData struct {
-	Username  string    `json:"username"`
-	CreatedAt time.Time `json:"createdAt"`
-}
 
 func (h handler) GetUser(c *gin.Context) {
 
@@ -46,10 +39,9 @@ func (h handler) GetUser(c *gin.Context) {
 	}
 
 	var viewData PublicUserData
-	if err := helpers.TransformData(user, &viewData); err != nil {
-		c.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": true, "message": "Something went wrong"})
-		return
-	}
+
+	viewData.Username = user.Username
+	viewData.CreatedAt = user.CreatedAt
 
 	// TODO discuss what info to share
 	c.JSON(http.StatusOK, gin.H{"data": viewData})

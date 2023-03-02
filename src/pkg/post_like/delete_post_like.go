@@ -43,6 +43,10 @@ func (h handler) DeletePostLike(c *gin.Context) {
 		c.AbortWithError(http.StatusInternalServerError, result.Error)
 		return
 	}
+	var viewData PublicPostLikeData
+	viewData.PostLikeID = postLike.ID
+	viewData.UserID = postLike.UserID
+	viewData.PostID = postLike.ID
 
-	c.JSON(http.StatusOK, &postLike)
+	c.JSON(http.StatusOK, gin.H{"data": viewData})
 }

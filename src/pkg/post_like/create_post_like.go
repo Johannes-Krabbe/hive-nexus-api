@@ -48,5 +48,10 @@ func (h handler) CreatePostLike(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, &postLike)
+	var viewData PublicPostLikeData
+	viewData.PostLikeID = postLike.ID
+	viewData.UserID = postLike.UserID
+	viewData.PostID = postLike.ID
+
+	c.JSON(http.StatusCreated, gin.H{"data": viewData})
 }
