@@ -54,6 +54,20 @@ func (h handler) GetComments(c *gin.Context) {
 		&comments, "post_id = ?", postID,
 	)
 
-	c.JSON(http.StatusOK, gin.H{"data": comments})
+	var viewDataArr []PublicCommentData
+
+	for _, comment := range comments {
+		var viewData PublicCommentData
+
+		viewData.CommentID = comment.ID
+		viewData.PostID = comment.PostID
+		viewData.Content = comment.Content
+		viewData.CreatedAt = comment.CreatedAt
+		viewData.Username = comment.User.Username
+
+		viewDataArr = append(viewDataArr, viewData)
+	}
+
+	c.JSON(http.StatusOK, gin.H{"data": viewDataArr})
 
 }
