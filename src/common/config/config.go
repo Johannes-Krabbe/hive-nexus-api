@@ -7,7 +7,7 @@ import (
 )
 
 type Config struct {
-	Port      string `mapstructure:"PORT"`
+	Port      string `mapstructure:"SERVER_PORT"`
 	DBUrl     string `mapstructure:"DB_URL"`
 	ClientUrl string `mapstructure:"CLIENT_URL"`
 	JwtSecret string `mapstructure:"JWT_SECRET"`
