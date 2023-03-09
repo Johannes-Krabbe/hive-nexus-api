@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"net/http"
 
-	"time"
-
 	"github.com/Johannes-Krabbe/hive-nexus-api/src/models"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
@@ -14,15 +12,6 @@ import (
 type SignInRequestBody struct {
 	Email    string `json:"email"`
 	Password string `json:"password"`
-}
-
-// TODO: define in controller
-type viewSignInData struct {
-	ID        uuid.UUID `json:"userId"`
-	CreatedAt time.Time `json:"createdAt"`
-	Username  string    `json:"username"`
-	Email     string    `json:"email"`
-	Token     string    `json:"token"`
 }
 
 func (h handler) SignIn(c *gin.Context) {
@@ -62,5 +51,12 @@ func (h handler) SignIn(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"token": token})
+	var viewData PublicUserData
+	viewData.ID = user.ID
+	viewData.CreatedAt = user.CreatedAt
+	viewData.Username = user.Username
+	viewData.Email = user.Email
+	viewData.Token = token
+
+	c.JSON(http.StatusCreated, gin.H{"data": viewData})
 }
