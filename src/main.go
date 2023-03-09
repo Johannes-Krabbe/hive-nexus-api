@@ -23,6 +23,7 @@ func main() {
 	router.RedirectFixedPath = false
 
 	h := db.Init(config.DBUrl)
+	// h := db.Init("postgres://postgres:postgres@172.22.0.2:5432/hive-nexus-api")
 
 	corsConfig := cors.DefaultConfig()
 
@@ -39,5 +40,5 @@ func main() {
 	routes.RegisterRoutes(router, h)
 
 	// temporary fix for popup in macos
-	_ = router.Run("localhost:3001")
+	_ = router.Run(config.Port)
 }

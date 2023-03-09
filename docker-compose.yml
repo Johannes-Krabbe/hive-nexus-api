@@ -1,24 +1,27 @@
-version: "3.7"
+version: "3"
+
 services:
-  database:
+  db:
     image: postgres
-    restart: always
-    env_file:
-      - .env
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hive-nexus-api
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
-      - data:/var/lib/postgresql/data
-  server:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    env_file: .env
-    depends_on:
-      - database
-    networks:
-      - default
+      - postgres-data:/var/lib/postgresql/data
+
+  app:
+    build: .
     ports:
-      - "8080:8080"
+      - "3001:3001"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: postgres
+      DB_NAME: hive-nexus-api
+
 volumes:
-  data:
+  postgres-data:
