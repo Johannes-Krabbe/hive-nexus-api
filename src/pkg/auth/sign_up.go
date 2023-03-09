@@ -15,15 +15,6 @@ type SignUpRequestBody struct {
 	Password string `json:"password"`
 }
 
-// TODO: define in controller
-// type viewSignUpData struct {
-// 	ID        uuid.UUID `json:"userId"`
-// 	CreatedAt time.Time `json:"createdAt"`
-// 	Username  string    `json:"username"`
-// 	Email     string    `json:"email"`
-// 	Token     string    `json:"token"`
-// }
-
 var validate *validator.Validate
 
 func (h handler) SignUp(c *gin.Context) {
