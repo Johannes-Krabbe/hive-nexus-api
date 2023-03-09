@@ -10,10 +10,11 @@ import (
 )
 
 type PublicCommentData struct {
-	Content   string    `json:"content"`
-	CreatedAt time.Time `json:"createdAt"`
-	Username  string    `json:"username"`
-	PostID    uuid.UUID `json:"postID"`
+	Content   string    `json:"content,omitempty"`
+	CreatedAt time.Time `json:"createdAt,omitempty"`
+	Username  string    `json:"username,omitempty"`
+	PostID    uuid.UUID `json:"postID,omitempty"`
+	CommentID uuid.UUID `json:"commentID,omitempty"`
 }
 
 type handler struct {
@@ -28,6 +29,6 @@ func RegisterRoutes(r *gin.RouterGroup, db *gorm.DB) {
 	r.Use(auth.VerifyTokenMiddleware())
 
 	r.POST("/create", h.CreateComment)
+	r.DELETE("/delete", h.DeleteComment)
 	r.GET("/get-multiple", h.GetComments)
-	// r.DELETE("/delete", h.DeleteComment)
 }

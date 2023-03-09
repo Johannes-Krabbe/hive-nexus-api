@@ -43,5 +43,8 @@ func (h handler) DeleteComment(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, &comment)
+	var viewData PublicCommentData
+	viewData.CommentID = comment.ID
+
+	c.JSON(http.StatusOK, gin.H{"data": viewData})
 }
