@@ -82,7 +82,6 @@ func (h handler) SignUp(c *gin.Context) {
 		return
 	}
 
-	// TODO: refac
 	var viewData PublicUserData
 	viewData.ID = user.ID
 	viewData.CreatedAt = user.CreatedAt
