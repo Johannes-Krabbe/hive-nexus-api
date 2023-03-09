@@ -40,5 +40,5 @@ func main() {
 	routes.RegisterRoutes(router, h)
 
 	// temporary fix for popup in macos
-	_ = router.Run(config.Port)
+	_ = router.Run()
 }
