@@ -3,8 +3,6 @@ package auth
 import (
 	"net/http"
 
-	"time"
-
 	"github.com/Johannes-Krabbe/hive-nexus-api/src/models"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
@@ -18,13 +16,13 @@ type SignUpRequestBody struct {
 }
 
 // TODO: define in controller
-type viewSignUpData struct {
-	ID        uuid.UUID `json:"userId"`
-	CreatedAt time.Time `json:"createdAt"`
-	Username  string    `json:"username"`
-	Email     string    `json:"email"`
-	Token     string    `json:"token"`
-}
+// type viewSignUpData struct {
+// 	ID        uuid.UUID `json:"userId"`
+// 	CreatedAt time.Time `json:"createdAt"`
+// 	Username  string    `json:"username"`
+// 	Email     string    `json:"email"`
+// 	Token     string    `json:"token"`
+// }
 
 var validate *validator.Validate
 
@@ -85,14 +83,12 @@ func (h handler) SignUp(c *gin.Context) {
 	}
 
 	// TODO: refac
-	// var viewData PublicCommentData
-	// viewData.CommentID = comment.ID
-	// viewData.Content = comment.Content
-	// viewData.CreatedAt = comment.CreatedAt
-	// viewData.Username = comment.User.Username
-	// viewData.PostID = comment.PostID
+	var viewData PublicUserData
+	viewData.ID = user.ID
+	viewData.CreatedAt = user.CreatedAt
+	viewData.Username = user.Username
+	viewData.Email = user.Email
+	viewData.Token = token
 
-	// c.JSON(http.StatusCreated, gin.H{"data": viewData})
-
-	c.JSON(http.StatusCreated, viewSignUpData{ID: user.ID, CreatedAt: user.CreatedAt, Username: user.Username, Email: user.Email, Token: token})
+	c.JSON(http.StatusCreated, gin.H{"data": viewData})
 }
