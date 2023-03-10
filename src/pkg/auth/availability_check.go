@@ -20,12 +20,12 @@ func (h handler) AvailabilityCheck(c *gin.Context) {
 	// c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 
 	if username == "" && email == "" {
-		c.AbortWithStatusJSON(http.StatusBadRequest, "Include Username or Email in querry params")
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Include Username or Email in query params")
 		return
 	}
 
 	if username != "" && email != "" {
-		c.AbortWithStatusJSON(http.StatusBadRequest, "Include just one: Username or Email in querry params")
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Include just one: Username or Email in query params")
 		return
 	}
 
