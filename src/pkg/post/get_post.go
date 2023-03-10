@@ -11,7 +11,7 @@ import (
 func (h handler) GetPost(c *gin.Context) {
 
 	// getting params
-	postID := c.Query("postID")
+	postID := c.Query("postId")
 
 	if postID == "" {
 		c.AbortWithStatusJSON(http.StatusBadRequest, "Include PostID in query params")
@@ -21,7 +21,7 @@ func (h handler) GetPost(c *gin.Context) {
 	var post models.Post
 
 	if postID != "" {
-		if h.DB.Limit(1).Select("ID", "CreatedAt", "Username", "Content", "Title").Find(&post, "ID = ?", postID); post.ID == uuid.Nil {
+		if h.DB.Limit(1).Select("ID", "CreatedAt", "Title", "Content").Find(&post, "ID = ?", postID); post.ID == uuid.Nil {
 			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": true, "message": "Post with this PostID does not exist"})
 			return
 		}

@@ -11,8 +11,8 @@ import (
 func (h handler) GetComments(c *gin.Context) {
 
 	// getting params
-	postID := c.Query("postID")
-	userID := c.Query("userID")
+	postID := c.Query("postId")
+	userID := c.Query("userId")
 	// c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 
 	if postID == "" && userID == "" {

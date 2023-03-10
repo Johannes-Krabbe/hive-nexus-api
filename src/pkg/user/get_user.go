@@ -12,7 +12,7 @@ func (h handler) GetUser(c *gin.Context) {
 
 	// getting params
 	username := c.Query("username")
-	userID := c.Query("userID")
+	userID := c.Query("userId")
 	// c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 
 	if username == "" && userID == "" {
