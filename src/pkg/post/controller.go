@@ -12,8 +12,8 @@ import (
 
 type PublicPostData struct {
 	PostID    uuid.UUID `json:"postID,omitempty"`
-	Content   string    `json:"content,omitempty"`
 	Title     string    `json:"title,omitempty"`
+	Content   string    `json:"content,omitempty"`
 	CreatedAt time.Time `json:"createdAt,omitempty"`
 	Username  string    `json:"username,omitempty"`
 }

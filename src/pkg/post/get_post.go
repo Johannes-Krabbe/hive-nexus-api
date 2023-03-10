@@ -9,7 +9,6 @@ import (
 )
 
 func (h handler) GetPost(c *gin.Context) {
-
 	// getting params
 	postID := c.Query("postId")
 
@@ -19,9 +18,8 @@ func (h handler) GetPost(c *gin.Context) {
 	}
 
 	var post models.Post
-
 	if postID != "" {
-		if h.DB.Limit(1).Select("ID", "CreatedAt", "Title", "Content").Find(&post, "ID = ?", postID); post.ID == uuid.Nil {
+		if h.DB.Preload("User").Limit(1).Select("ID", "Title", "Content", "CreatedAt", "UserID").Find(&post, "ID = ?", postID); post.ID == uuid.Nil {
 			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": true, "message": "Post with this PostID does not exist"})
 			return
 		}
@@ -29,12 +27,11 @@ func (h handler) GetPost(c *gin.Context) {
 
 	var viewData PublicPostData
 
-	// viewData.Username = post.User.Username
 	viewData.PostID = post.ID
 	viewData.Title = post.Title
 	viewData.Content = post.Content
 	viewData.CreatedAt = post.CreatedAt
-	// TODO: add Username here
+	viewData.Username = post.User.Username
 
 	c.JSON(http.StatusOK, gin.H{"data": viewData})
 }
