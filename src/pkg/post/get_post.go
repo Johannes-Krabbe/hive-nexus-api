@@ -14,7 +14,7 @@ func (h handler) GetPost(c *gin.Context) {
 	postID := c.Query("postId")
 
 	if postID == "" {
-		c.AbortWithStatusJSON(http.StatusBadRequest, "Include PostID in query params")
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Include postId in query params")
 		return
 	}
 
@@ -29,11 +29,12 @@ func (h handler) GetPost(c *gin.Context) {
 
 	var viewData PublicPostData
 
-	viewData.Username = post.User.Username
+	// viewData.Username = post.User.Username
+	viewData.PostID = post.ID
 	viewData.Title = post.Title
 	viewData.Content = post.Content
 	viewData.CreatedAt = post.CreatedAt
-	viewData.CreatedAt = post.CreatedAt
+	// TODO: add Username here
 
 	c.JSON(http.StatusOK, gin.H{"data": viewData})
 }
