@@ -31,5 +31,6 @@ func RegisterRoutes(r *gin.RouterGroup, db *gorm.DB) {
 
 	r.POST("/create", h.CreatePost)
 	r.POST("/delete", h.DeletePost)
+	r.GET("/one", h.GetPost)
 	r.GET("/all", h.GetPosts)
 }
