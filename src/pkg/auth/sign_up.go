@@ -15,11 +15,6 @@ type SignUpRequestBody struct {
 	Password string `json:"password"`
 }
 
-type viewSignUpData struct {
-	Username string `json:"username"`
-	Token    string `json:"token"`
-}
-
 var validate *validator.Validate
 
 func (h handler) SignUp(c *gin.Context) {
@@ -78,5 +73,12 @@ func (h handler) SignUp(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, viewSignUpData{Username: user.Username, Token: token})
+	var viewData PublicUserData
+	viewData.ID = user.ID
+	viewData.CreatedAt = user.CreatedAt
+	viewData.Username = user.Username
+	viewData.Email = user.Email
+	viewData.Token = token
+
+	c.JSON(http.StatusCreated, gin.H{"data": viewData})
 }
