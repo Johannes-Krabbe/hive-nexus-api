@@ -18,11 +18,9 @@ func (h handler) GetPost(c *gin.Context) {
 	}
 
 	var post models.Post
-	if postID != "" {
-		if h.DB.Preload("User").Limit(1).Select("ID", "Title", "Content", "CreatedAt", "UserID").Find(&post, "ID = ?", postID); post.ID == uuid.Nil {
-			c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": true, "message": "Post with this PostID does not exist"})
-			return
-		}
+	if h.DB.Preload("User").Limit(1).Select("ID", "Title", "Content", "CreatedAt", "UserID").Find(&post, "ID = ?", postID); post.ID == uuid.Nil {
+		c.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": true, "message": "Post with this PostID does not exist"})
+		return
 	}
 
 	var viewData PublicPostData
