@@ -51,5 +51,12 @@ func (h handler) SignIn(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"token": token})
+	var viewData PublicUserData
+	viewData.ID = user.ID
+	viewData.CreatedAt = user.CreatedAt
+	viewData.Username = user.Username
+	viewData.Email = user.Email
+	viewData.Token = token
+
+	c.JSON(http.StatusCreated, gin.H{"data": viewData})
 }
