@@ -21,8 +21,8 @@ func (h handler) GetPosts(c *gin.Context) {
 		var viewData PublicPostData
 
 		viewData.PostID = post.ID
-		viewData.Content = post.Content
 		viewData.Title = post.Title
+		viewData.Content = post.Content
 		viewData.CreatedAt = post.CreatedAt
 		viewData.Username = post.User.Username
 

@@ -11,17 +11,17 @@ import (
 func (h handler) GetComments(c *gin.Context) {
 
 	// getting params
-	postID := c.Query("postID")
-	userID := c.Query("userID")
+	postID := c.Query("postId")
+	userID := c.Query("userId")
 	// c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 
 	if postID == "" && userID == "" {
-		c.AbortWithStatusJSON(http.StatusBadRequest, "Include postID or userID in querry params")
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Include postId or userId in query params")
 		return
 	}
 
 	if userID != "" && postID != "" {
-		c.AbortWithStatusJSON(http.StatusBadRequest, "Include just one: Username or Email in querry params")
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Include just one: username or email in query params")
 		return
 	}
 
