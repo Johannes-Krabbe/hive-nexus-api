@@ -10,10 +10,10 @@ import (
 
 func (h handler) GetPost(c *gin.Context) {
 	// getting params
-	postID := c.Query("postId")
+	postID := c.Query("postID")
 
 	if postID == "" {
-		c.AbortWithStatusJSON(http.StatusBadRequest, "Include postId in query params")
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Include postID in query params")
 		return
 	}
 
