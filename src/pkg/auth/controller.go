@@ -10,7 +10,7 @@ import (
 )
 
 type PublicUserData struct {
-	ID        uuid.UUID `json:"userId,omitempty"`
+	ID        uuid.UUID `json:"userID,omitempty"`
 	CreatedAt time.Time `json:"createdAt,omitempty"`
 	Username  string    `json:"username,omitempty"`
 	Email     string    `json:"email,omitempty"`

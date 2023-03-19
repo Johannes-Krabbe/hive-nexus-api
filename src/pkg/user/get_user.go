@@ -12,16 +12,16 @@ func (h handler) GetUser(c *gin.Context) {
 
 	// getting params
 	username := c.Query("username")
-	userID := c.Query("userId")
+	userID := c.Query("userID")
 	// c.Writer.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
 
 	if username == "" && userID == "" {
-		c.AbortWithStatusJSON(http.StatusBadRequest, "Include username or userId in query params")
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Include username or userID in query params")
 		return
 	}
 
 	if username != "" && userID != "" {
-		c.AbortWithStatusJSON(http.StatusBadRequest, "Include just one: username or userId in query params")
+		c.AbortWithStatusJSON(http.StatusBadRequest, "Include just one: username or userID in query params")
 		return
 	}
 
