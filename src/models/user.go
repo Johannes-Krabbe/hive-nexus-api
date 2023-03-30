@@ -1,9 +1,10 @@
 package models
 
 import (
+	"time"
+
 	"github.com/google/uuid"
 	"gorm.io/gorm"
-	"time"
 )
 
 type User struct {
@@ -16,4 +17,7 @@ type User struct {
 	Email    string `validate:"required,email" json:"email,omitempty" gorm:"type varchar(128) not null unique"`
 	Password string `validate:"required" json:"password,omitempty" gorm:"type varchar(128) not null"`
 	Salt     string `validate:"required" json:"salt,omitempty" gorm:"type varchar(128) not null"`
+
+	ChatRooms []ChatRoom `json:"chatRooms,omitempty" gorm:"many2many:user_chatrooms;"`
+	Follows   []Follow   `json:"follows,omitempty"`
 }
