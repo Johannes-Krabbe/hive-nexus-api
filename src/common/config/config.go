@@ -2,6 +2,7 @@ package config
 
 import (
 	"log"
+	"os"
 
 	"github.com/spf13/viper"
 )
@@ -15,18 +16,25 @@ type Config struct {
 
 func LoadConfig() (c Config, err error) {
 	log.Println("Loading config")
-	viper.SetConfigFile("./.env")
+	if os.Getenv("ENVIRONMENT") != "production" {
 
-	viper.AutomaticEnv()
+		viper.SetConfigFile("./.env")
 
-	err = viper.ReadInConfig()
+		viper.AutomaticEnv()
 
-	if err != nil {
-		return
+		err = viper.ReadInConfig()
+
+		if err != nil {
+			return
+		}
+
+	} else {
+
+		viper.AutomaticEnv()
+
 	}
 
 	err = viper.Unmarshal(&c)
-
 	log.Println("Successfully loaded config")
 	return
 }
