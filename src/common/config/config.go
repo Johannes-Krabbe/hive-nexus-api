@@ -2,7 +2,6 @@ package config
 
 import (
 	"log"
-	"os"
 
 	"github.com/spf13/viper"
 )
@@ -16,23 +15,18 @@ type Config struct {
 
 func LoadConfig() (c Config, err error) {
 	log.Println("Loading config")
-	if os.Getenv("ENVIRONMENT") == "local" {
+	viper.SetConfigFile("./app.env")
 
-		viper.SetConfigFile("./.env")
+	viper.AutomaticEnv()
 
-		viper.AutomaticEnv()
-
-		err = viper.ReadInConfig()
-
-		if err != nil {
-			return
-		}
-
-	} else {
-		viper.AutomaticEnv()
+	err = viper.ReadInConfig()
+	if err != nil {
+		return
 	}
 
 	err = viper.Unmarshal(&c)
+
+	log.Println(c)
 	log.Println("Successfully loaded config")
 	return
 }
@@ -41,6 +35,24 @@ func GetValueFromEnv(key string) string {
 	value := viper.GetString(key)
 	return value
 }
+
+/*
+
+	viper.AutomaticEnv()
+
+	err = viper.ReadInConfig()
+
+	if err != nil {
+		return
+	}
+
+*/
+/*
+	viper.AddConfigPath(".")
+	viper.SetConfigName("app")
+	viper.SetConfigType("env")
+	viper.AutomaticEnv()
+*/
 
 /*
 func LoadConfig() (c Config, err error) {
