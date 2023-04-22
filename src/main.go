@@ -50,5 +50,5 @@ func main() {
 	*/
 
 	// temporary fix for popup in macos
-	_ = router.Run("localhost:8080")
+	_ = router.Run()
 }
