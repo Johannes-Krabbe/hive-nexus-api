@@ -29,5 +29,5 @@ func (h handler) GetPosts(c *gin.Context) {
 		viewDataArr = append(viewDataArr, viewData)
 	}
 
-	c.JSON(http.StatusCreated, gin.H{"data": viewDataArr})
+	c.JSON(http.StatusOK, gin.H{"data": viewDataArr})
 }

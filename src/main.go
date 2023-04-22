@@ -35,7 +35,7 @@ func main() {
 	// OPTIONS method for ReactJS
 	// corsConfig.AddAllowMethods("OPTIONS")
 
-	log.Println("AllowMethods: ", corsConfig.AllowMethods)
+	corsConfig.AddAllowHeaders("Cookie")
 	// Register the middleware
 	router.Use(cors.New(corsConfig))
 	log.Println("Success: Configure CORS")
