@@ -2,7 +2,7 @@ package config
 
 import (
 	"log"
-	//	"os"
+	"os"
 
 	"github.com/spf13/viper"
 )
@@ -14,7 +14,6 @@ type Config struct {
 	JwtSecret string `mapstructure:"JWT_SECRET"`
 }
 
-/*
 func LoadConfig() (c Config, err error) {
 	log.Println("Loading config")
 	if os.Getenv("ENVIRONMENT") == "local" {
@@ -42,11 +41,11 @@ func GetValueFromEnv(key string) string {
 	value := viper.GetString(key)
 	return value
 }
-*/
 
+/*
 func LoadConfig() (c Config, err error) {
 	log.Println("Loading config")
-	// viper.SetConfigFile("./.env")
+	viper.SetConfigFile("./.env")
 
 	viper.AutomaticEnv()
 
@@ -66,3 +65,4 @@ func GetValueFromEnv(key string) string {
 	value := viper.GetString(key)
 	return value
 }
+*/
