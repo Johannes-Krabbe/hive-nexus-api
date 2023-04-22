@@ -16,7 +16,7 @@ type Config struct {
 
 func LoadConfig() (c Config, err error) {
 	log.Println("Loading config")
-	if os.Getenv("ENVIRONMENT") != "production" {
+	if os.Getenv("ENVIRONMENT") == "local" {
 
 		viper.SetConfigFile("./.env")
 
@@ -29,9 +29,7 @@ func LoadConfig() (c Config, err error) {
 		}
 
 	} else {
-
 		viper.AutomaticEnv()
-
 	}
 
 	err = viper.Unmarshal(&c)

@@ -40,8 +40,9 @@ func main() {
 
 	// routes.RegisterRoutes(router, h)
 
+	var test = "clientUrl: " + config.ClientUrl
 	router.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, config.ClientUrl)
+		c.String(http.StatusOK, test)
 	})
 
 	// temporary fix for popup in macos
