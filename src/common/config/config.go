@@ -15,7 +15,7 @@ type Config struct {
 
 func LoadConfig() (c Config, err error) {
 	log.Println("Loading config")
-	viper.SetConfigFile("./app.env")
+	// viper.SetConfigFile("./app.env")
 
 	viper.AutomaticEnv()
 
