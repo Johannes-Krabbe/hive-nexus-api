@@ -46,7 +46,7 @@ func GetValueFromEnv(key string) string {
 
 func LoadConfig() (c Config, err error) {
 	log.Println("Loading config")
-	viper.SetConfigFile("./.env")
+	// viper.SetConfigFile("./.env")
 
 	viper.AutomaticEnv()
 
