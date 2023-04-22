@@ -58,5 +58,5 @@ func (h handler) SignIn(c *gin.Context) {
 	viewData.Email = user.Email
 	viewData.Token = token
 
-	c.JSON(http.StatusCreated, gin.H{"data": viewData})
+	c.JSON(http.StatusOK, gin.H{"data": viewData})
 }
