@@ -24,6 +24,24 @@ func LoadConfig() (c Config, err error) {
 		return
 	}
 
+	err = viper.BindEnv("PORT")
+	if err != nil {
+		return
+	}
+
+	err = viper.BindEnv("DB_URL")
+	if err != nil {
+		return
+	}
+	err = viper.BindEnv("CLIENT_URL")
+	if err != nil {
+		return
+	}
+	err = viper.BindEnv("JWT_SECRET")
+	if err != nil {
+		return
+	}
+
 	err = viper.Unmarshal(&c)
 
 	log.Println(c)
@@ -35,46 +53,3 @@ func GetValueFromEnv(key string) string {
 	value := viper.GetString(key)
 	return value
 }
-
-/*
-
-	viper.AutomaticEnv()
-
-	err = viper.ReadInConfig()
-
-	if err != nil {
-		return
-	}
-
-*/
-/*
-	viper.AddConfigPath(".")
-	viper.SetConfigName("app")
-	viper.SetConfigType("env")
-	viper.AutomaticEnv()
-*/
-
-/*
-func LoadConfig() (c Config, err error) {
-	log.Println("Loading config")
-	viper.SetConfigFile("./.env")
-
-	viper.AutomaticEnv()
-
-	err = viper.ReadInConfig()
-
-	if err != nil {
-		return
-	}
-
-	err = viper.Unmarshal(&c)
-
-	log.Println("Successfully loaded config")
-	return
-}
-
-func GetValueFromEnv(key string) string {
-	value := viper.GetString(key)
-	return value
-}
-*/
