@@ -1,10 +1,10 @@
 package main
 
 import (
-	// "log"
+	"log"
 	"net/http"
 
-	// "github.com/Johannes-Krabbe/hive-nexus-api/src/common/config"
+	"github.com/Johannes-Krabbe/hive-nexus-api/src/common/config"
 	// "github.com/Johannes-Krabbe/hive-nexus-api/src/common/db"
 	// "github.com/Johannes-Krabbe/hive-nexus-api/src/common/routes"
 	"github.com/gin-contrib/cors"
@@ -12,11 +12,11 @@ import (
 )
 
 func main() {
-	// config, err := config.LoadConfig()
+	config, err := config.LoadConfig()
 
-	// if err != nil {
-	//	log.Fatalln(err)
-	// }
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	router := gin.Default()
 	// Disable automatic redirects
@@ -41,7 +41,7 @@ func main() {
 	// routes.RegisterRoutes(router, h)
 
 	router.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "hello world")
+		c.String(http.StatusOK, config.ClientUrl)
 	})
 
 	// temporary fix for popup in macos
