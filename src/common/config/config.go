@@ -44,7 +44,6 @@ func LoadConfig() (c Config, err error) {
 
 	err = viper.Unmarshal(&c)
 
-	log.Println(c)
 	log.Println("Successfully loaded config")
 	return
 }

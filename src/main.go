@@ -25,6 +25,7 @@ func main() {
 
 	h := db.Init(config.DBUrl)
 
+	log.Println("Configure CORS")
 	corsConfig := cors.DefaultConfig()
 
 	corsConfig.AllowOrigins = []string{config.ClientUrl}
@@ -32,10 +33,12 @@ func main() {
 	corsConfig.AllowCredentials = true
 
 	// OPTIONS method for ReactJS
-	corsConfig.AddAllowMethods("OPTIONS")
+	// corsConfig.AddAllowMethods("OPTIONS")
 
+	log.Println("AllowMethods: ", corsConfig.AllowMethods)
 	// Register the middleware
 	router.Use(cors.New(corsConfig))
+	log.Println("Success: Configure CORS")
 
 	routes.RegisterRoutes(router, h)
 
@@ -47,5 +50,5 @@ func main() {
 	*/
 
 	// temporary fix for popup in macos
-	_ = router.Run()
+	_ = router.Run("localhost:8080")
 }
