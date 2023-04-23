@@ -36,6 +36,8 @@ func main() {
 	// corsConfig.AddAllowMethods("OPTIONS")
 
 	corsConfig.AddAllowHeaders("Cookie")
+	log.Println("AllowHeadders: ", corsConfig.AllowHeaders)
+	log.Println("AllowOrigins: ", corsConfig.AllowOrigins)
 	// Register the middleware
 	router.Use(cors.New(corsConfig))
 	log.Println("Success: Configure CORS")
