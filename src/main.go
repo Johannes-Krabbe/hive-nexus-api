@@ -35,7 +35,7 @@ func main() {
 	// OPTIONS method for ReactJS
 	// corsConfig.AddAllowMethods("OPTIONS")
 
-	corsConfig.AddAllowHeaders("Cookie")
+	corsConfig.AddAllowHeaders("Authorization")
 	log.Println("AllowHeadders: ", corsConfig.AllowHeaders)
 	log.Println("AllowOrigins: ", corsConfig.AllowOrigins)
 	// Register the middleware
