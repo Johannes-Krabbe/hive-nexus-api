@@ -32,11 +32,12 @@ func main() {
 	// To be able to send tokens to the server.
 	corsConfig.AllowCredentials = true
 
+	corsConfig.AllowHeaders = []string{"*"}
 	// OPTIONS method for ReactJS
 	// corsConfig.AddAllowMethods("OPTIONS")
 
 	corsConfig.AddAllowHeaders("Authorization")
-	log.Println("AllowHeadders: ", corsConfig.AllowHeaders)
+	log.Println("AllowHeaders: ", corsConfig.AllowHeaders)
 	log.Println("AllowOrigins: ", corsConfig.AllowOrigins)
 	// Register the middleware
 	router.Use(cors.New(corsConfig))
