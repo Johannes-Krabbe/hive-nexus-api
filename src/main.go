@@ -32,7 +32,6 @@ func main() {
 	// To be able to send tokens to the server.
 	corsConfig.AllowCredentials = true
 
-	corsConfig.AllowHeaders = []string{"*"}
 	// OPTIONS method for ReactJS
 	// corsConfig.AddAllowMethods("OPTIONS")
 
