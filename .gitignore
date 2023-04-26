@@ -1,6 +1,5 @@
 /main
 app.env
-.env
 /tmp
 gin-bin
 
