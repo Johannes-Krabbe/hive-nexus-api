@@ -12,7 +12,7 @@ type PostLike struct {
 	UpdatedAt time.Time `json:"updatedAt,omitempty"`
 
 	UserID uuid.UUID `json:"userID"`
-	PostID uuid.UUID `json:"postID"`
+	PostID uuid.UUID `json:"postID" gorm:"index:,sort:desc"`
 	User   User      `json:"user"`
 	Post   Post      `json:"post"`
 }
