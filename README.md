@@ -27,3 +27,9 @@ The backend implements a REST API to respond to queries submitted by the fronten
 - POST   /auth/sign-up                path used for signing up as a new user
 - POST   /auth/sign-in                path used for signing in
 - GET    /auth/availability-check     path used for checking if a username is available or already taken
+
+# Architecture
+
+Below you can see an architecture diagram for the application (include the frontend):
+
+<img src="https://raw.githubusercontent.com/Johannes-Krabbe/hive-nexus-api/ee02dd87457adcc6c8a7266eaef585cd57aeb1ef/architecture.svg"> Architecture Diagram
