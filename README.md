@@ -34,6 +34,10 @@ Below you can see an architecture diagram for the application (include the front
 
 <img src="./docs/architecture.svg"> Architecture Diagram
 
-## CICD
+## CICD Architecture
 
-<img src="./docs/CICD_diagam.png"> CICD Diagram
+<img src="./docs/CICD_diagram.png"> CICD Diagram
+
+## Cloud Architecture
+
+<img src="./docs/Cloud_diagram.png"> CICD Diagram
