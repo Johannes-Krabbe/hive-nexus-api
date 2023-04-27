@@ -28,6 +28,10 @@ The backend implements a REST API to respond to queries submitted by the fronten
 - POST /auth/sign-in path used for signing in
 - GET /auth/availability-check path used for checking if a username is available or already taken
 
+## Database
+
+<img src="./docs/ER_diagram.svg"> ER Diagram
+
 # Architecture
 
 Below you can see an architecture diagram for the application (include the frontend):
