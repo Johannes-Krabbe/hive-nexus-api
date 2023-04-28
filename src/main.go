@@ -36,7 +36,7 @@ func main() {
 	// corsConfig.AddAllowMethods("OPTIONS")
 
 	corsConfig.AddAllowHeaders("Authorization")
-	log.Println("AllowHeadders: ", corsConfig.AllowHeaders)
+	log.Println("AllowHeaders: ", corsConfig.AllowHeaders)
 	log.Println("AllowOrigins: ", corsConfig.AllowOrigins)
 	// Register the middleware
 	router.Use(cors.New(corsConfig))
