@@ -23,7 +23,7 @@ The backend implements a REST API to respond to queries submitted by the fronten
 - POST /like/delete remove a like from the post
 - POST /comment/create submit a comment for a post
 - POST /comment/delete submit a request to delete a post
-- GET /comment/get-multiple ???
+- GET /comment/get-multiple returnes the comments of one post or one user, depending on the parameters
 - POST /auth/sign-up path used for signing up as a new user
 - POST /auth/sign-in path used for signing in
 - GET /auth/availability-check path used for checking if a username is available or already taken
